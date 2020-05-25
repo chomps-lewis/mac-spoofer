@@ -31,10 +31,12 @@ def is_mac(s):
         raise Exception('Not a valid MAC Address.')
 
 
-response = pyip.inputCustom(is_mac, prompt='Enter your new MAC Address:\n', limit=4,)
+interface = pyip.inputStr(prompt='What interface would you like to change?\n')
+new_address = pyip.inputCustom(is_mac, prompt='Enter your new MAC Address:\n', limit=4,)
 
+print('Changing MAC address of ' + interface + ' to ' + new_address)
 
-subprocess.run('sudo ifconfig eth0 down', shell=True)  # disconnect eth0
-subprocess.run(('sudo ifconfig eth0 hw ether ' + response), shell=True) # Change the MAC
-subprocess.run('sudo ifconfig eth0 up', shell=True)  # Reconnect eth0
-subprocess.run('sudo ifconfig eth0', shell=True)  # Return connection properties
+subprocess.run('sudo ifconfig' + interface + 'down', shell=True)  # disconnect interface
+subprocess.run(('sudo ifconfig' + interface + 'hw ether ' + new_address), shell=True) # Change the MAC
+subprocess.run('sudo ifconfig' + interface + 'up', shell=True)  # Reconnect' + interface
+subprocess.run('sudo ifconfig' + interface, shell=True)  # Return connection properties
