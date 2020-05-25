@@ -25,7 +25,7 @@ import pyinputplus as pyip
 
 
 def is_mac(s):
-    mac_regex = re.compile(r'(([A-F]|\d){2}:){5}([A-F]|\d){2}')
+    mac_regex = re.compile(r'(([A-Fa-f]|\d){2}:){5}([A-Fa-f]|\d){2}')
     mo1 = mac_regex.search(s)
     if mo1 is None:
         raise Exception('Not a valid MAC Address.')
